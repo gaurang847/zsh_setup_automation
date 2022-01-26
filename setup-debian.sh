@@ -12,3 +12,6 @@ print_heading () {
 
 print_heading "Step 0: Preparation"
 sudo apt update   # Update apt cache
+
+print_heading "Step 1: Installing Font FiraCode"
+sudo apt install -y fonts-firacode
