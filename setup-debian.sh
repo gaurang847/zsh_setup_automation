@@ -46,4 +46,5 @@ print_heading "Step 5: Configure custom files"
 rsync -vh assets/.zshrc $HOME
 rsync -vhr assets/custom/* $HOME/.oh-my-zsh/custom
 
-print_heading "Setup complete! :D\nYou need to log out and log back in for changes to take effect."
+print_heading "Setup complete! :D\nYou need to log out and log back in for the changes to take effect."
+print_heading "Please note that you'll have to manually set FiraCode font in your terminal emulator and in VS Code (for editor and terminal) and enable ligatures in both places. Otherwise, you'll see ugly squares for symbols that your terminal doesn't understand."
