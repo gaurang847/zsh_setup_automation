@@ -18,7 +18,8 @@ This is what my terminal currently looks like with the setup.
     ```
     ./setup-debian.sh
     ```
-    Note: You may be required to input your password a few times while the script is running.
+    Note: You may be required to input your password a few times while the script is running.  
+    **DO NOT** use sudo to run the script as that might change the shell for the root user and not yours.
 
 [firacode]: https://github.com/tonsky/FiraCode
 [nerd-font]: https://www.nerdfonts.com
