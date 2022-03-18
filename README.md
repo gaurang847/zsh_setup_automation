@@ -7,7 +7,7 @@ This is what my terminal currently looks like with the setup.
 
 ## The setup
 1. Uses [Font FiraCode][firacode] with [Nerd-font patch][nerd-font]. (The font needs to be set manually in the terminal and VS Code settings.)  
-**Note:** You need to use a terminal emulator that supports font ligatures. Otherwise your terminal will show ugly squares in place of symbols that it doesn't understand. Click [here][firacode-supported-terminals] to find a list of terminals, that FiraCode thinks, support it.
+**Note:** You need to use a terminal emulator that supports font ligatures. Otherwise your terminal will show ugly squares in place of symbols that it doesn't understand. Click [here][firacode-supported-terminals] to find a list of terminals that, FiraCode thinks, support it.
 2. Uses [Zsh][zsh] shell with the [Oh-my-Zsh][oh-my-zsh] configuration framework.
 3. Uses [Powerlevel10k][p10k] theme. (More like a theme engine really)
 4. [Oh-My-Zsh plugins][oh-my-zsh-plugins] used: (colored-man-pages colorize command-not-found httpie rand-quote)
@@ -20,6 +20,7 @@ This is what my terminal currently looks like with the setup.
     ```
     Note: You may be required to input your password a few times while the script is running.  
     **DO NOT** use sudo to run the script as that might change the shell for the root user and not yours.
+3. Logout and login again.
 
 [firacode]: https://github.com/tonsky/FiraCode
 [nerd-font]: https://www.nerdfonts.com
