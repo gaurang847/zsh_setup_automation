@@ -1,5 +1,5 @@
 # Font mode
-typeset -g POWERLEVEL9K_MODE='nerdfont-complete'
+typeset -g POWERLEVEL9K_MODE='nerdfont-v8'
 
 # Remove End of line symbol
 typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=

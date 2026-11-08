@@ -6,21 +6,22 @@ This is what my terminal currently looks like with the setup.
 ![Current setup screenshot](https://user-images.githubusercontent.com/12295171/151579199-85e70180-8d0b-41c1-b920-38533c042ee7.png)
 
 ## The setup
-1. Uses [Font FiraCode][firacode] with [Nerd-font patch][nerd-font]. (The font needs to be set manually in the terminal and VS Code settings.)  
-**Note:** You need to use a terminal emulator that supports font ligatures. Otherwise your terminal will show ugly squares in place of symbols that it doesn't understand. Click [here][firacode-supported-terminals] to find a list of terminals that, FiraCode thinks, support it.
+1. Uses [Font FiraCode][firacode] with [Nerd-font patch][nerd-font]. (The font needs to be set manually to **FiraCode Nerd Font** in your terminal emulator and VS Code settings.)  
+**Note:** You need to configure your terminal to use **FiraCode Nerd Font** to display icons and prompt symbols properly. Additionally, using a terminal emulator that supports font ligatures is recommended for code ligatures. Click [here][firacode-supported-terminals] to find a list of terminals that support ligatures.
 2. Uses [Zsh][zsh] shell with the [Oh-my-Zsh][oh-my-zsh] configuration framework.
-3. Uses [Powerlevel10k][p10k] theme. (More like a theme engine really)
-4. [Oh-My-Zsh plugins][oh-my-zsh-plugins] used: (colored-man-pages colorize command-not-found httpie rand-quote)
+3. Uses [Powerlevel10k][p10k] theme engine configured with a custom Masquerade style.
+4. [Oh-My-Zsh plugins][oh-my-zsh-plugins] used: `colored-man-pages`, `colorize`, `command-not-found`, `httpie`, and `rand-quote`.
 
 ## How to run the setup
 1. Clone this repo.
-2. Run the install script. Currently, only debian-based systems are supported (Ubuntu, Kubuntu, etc.)
-    ```
+2. Run the install script. Currently, debian-based systems are supported (Ubuntu, Kubuntu, Pop!_OS, Debian, etc.):
+    ```bash
     ./setup-debian.sh
     ```
-    Note: You may be required to input your password a few times while the script is running.  
-    **DO NOT** use sudo to run the script as that might change the shell for the root user and not yours.
-3. Logout and login again.
+    *Note:* You may be required to input your sudo password while the script installs package prerequisites.  
+    **DO NOT** run the script itself with `sudo` (e.g. `sudo ./setup-debian.sh`), as that will configure and change the default shell for `root` instead of your user account.  
+    *(If an existing `~/.zshrc` is detected, a timestamped backup `~/.zshrc.bak.<timestamp>` will automatically be created before copying the new configuration).*
+3. Logout and login again for the default shell changes to take full effect.
 
 [firacode]: https://github.com/tonsky/FiraCode
 [nerd-font]: https://www.nerdfonts.com

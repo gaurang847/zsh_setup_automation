@@ -1,1 +1,5 @@
 .vscode
+*.bak*
+*.swp
+*.swo
+.DS_Store

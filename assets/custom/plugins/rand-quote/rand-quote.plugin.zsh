@@ -6,13 +6,16 @@ fi
 function quote {
   setopt localoptions nopromptsubst
 
-  # Get random quote data
+  # Ensure curl is available
+  (( $+commands[curl] )) || return 0
+
+  # Get random quote data (with strict timeout to never block terminal startup)
   local data
-  data="$(command curl -s --connect-timeout 1 "http://www.quotationspage.com/random.php?number=1&collection[]=mgm&collection[]=motivate" \
-    | iconv -c -f ISO-8859-1 -t UTF-8 \
+  data="$(command curl -fsS --connect-timeout 1 --max-time 2 "https://www.quotationspage.com/random.php?number=1&collection[]=mgm&collection[]=motivate" \
+    | iconv -c -f ISO-8859-1 -t UTF-8 2>/dev/null \
     | command grep -a -m 1 'dt class="quote"')"
 
-  # Exit if could not fetch random quote
+  # Exit silently if could not fetch random quote (e.g. offline or timeout)
   [[ -n "$data" ]] || return 0
 
   local quote author

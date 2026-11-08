@@ -72,6 +72,12 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(colored-man-pages colorize command-not-found httpie rand-quote)
 
+# Explicitly use pygmentize for the colorize plugin
+export ZSH_COLORIZE_TOOL="pygmentize"
+
+# Load Powerlevel10k theme configuration (Masquerade) before initializing Oh-My-Zsh
+[[ -f "${ZSH_CUSTOM:-$ZSH/custom}/themes/masquerade.zsh-theme" ]] && source "${ZSH_CUSTOM:-$ZSH/custom}/themes/masquerade.zsh-theme"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
