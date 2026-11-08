@@ -30,7 +30,7 @@ If you ever want to revert back to your default settings:
     ./undo-debian.sh
     ```
     This script will:
-    - Revert your default shell back to Bash.
+    - Revert your default shell back to your previous shell (or keep it if it was already Zsh).
     - Restore your original `~/.zshrc` from the backup.
     - Remove Oh-My-Zsh (`~/.oh-my-zsh`) and Powerlevel10k.
     - Remove FiraCode Nerd Font from `~/.local/share/fonts`.

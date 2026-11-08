@@ -37,9 +37,14 @@ else
 fi
 
 print_heading "Step 2: Making ZSH the default shell"
+PREV_SHELL_FILE="$HOME/.zsh_setup_prev_shell"
 CURRENT_SHELL="$(getent passwd "$USER" | cut -d: -f7)"
 ZSH_BIN="$(command -v zsh)"
 if [[ "$CURRENT_SHELL" != "$ZSH_BIN" ]]; then
+  # Record the original shell before changing so undo-debian.sh can accurately restore it
+  if [[ ! -f "$PREV_SHELL_FILE" ]]; then
+    echo "$CURRENT_SHELL" > "$PREV_SHELL_FILE"
+  fi
   chsh -s "$ZSH_BIN"
 else
   echo "Zsh is already your default shell."

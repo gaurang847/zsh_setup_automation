@@ -12,15 +12,45 @@ print_heading () {
 
 print_heading "Reverting ZSH setup to previous defaults..."
 
-# Step 1: Revert default shell back to Bash
-print_heading "Step 1: Reverting default shell to Bash"
-BASH_BIN="$(command -v bash || echo "/bin/bash")"
+# Step 1: Revert default shell to the previous shell
+print_heading "Step 1: Reverting default shell"
+PREV_SHELL_FILE="$HOME/.zsh_setup_prev_shell"
 CURRENT_SHELL="$(getent passwd "$USER" | cut -d: -f7)"
-if [[ "$CURRENT_SHELL" != "$BASH_BIN" ]]; then
-  echo "Changing default shell from $CURRENT_SHELL to $BASH_BIN..."
-  chsh -s "$BASH_BIN"
+
+if [[ -f "$PREV_SHELL_FILE" ]]; then
+  ORIGINAL_SHELL="$(tr -d '[:space:]' < "$PREV_SHELL_FILE")"
+  rm -f "$PREV_SHELL_FILE"
+
+  if [[ -n "$ORIGINAL_SHELL" && "$ORIGINAL_SHELL" != "$CURRENT_SHELL" ]]; then
+    if command -v "$ORIGINAL_SHELL" >/dev/null 2>&1 || grep -qx "$ORIGINAL_SHELL" /etc/shells 2>/dev/null; then
+      echo "Reverting default shell from $CURRENT_SHELL to previous shell ($ORIGINAL_SHELL)..."
+      chsh -s "$ORIGINAL_SHELL"
+    else
+      echo "Previous shell ($ORIGINAL_SHELL) was not found on this system. Keeping current shell ($CURRENT_SHELL)."
+    fi
+  else
+    echo "Default shell was already $CURRENT_SHELL before running setup. No change needed."
+  fi
 else
-  echo "Default shell is already Bash ($BASH_BIN)."
+  # If no previous shell record was found (e.g. ran setup before tracking or file was removed)
+  echo "No previous shell record found ($PREV_SHELL_FILE)."
+  if [[ "$CURRENT_SHELL" == *"zsh"* ]]; then
+    if [[ -t 0 ]]; then
+      DEFAULT_FALLBACK="$(command -v bash || echo "/bin/bash")"
+      read -r -p "Your current shell is Zsh. What shell would you like to revert to? [Default: $DEFAULT_FALLBACK, or type 'keep']: " user_shell || true
+      user_shell="${user_shell:-$DEFAULT_FALLBACK}"
+      if [[ "$user_shell" != "keep" && "$user_shell" != "$CURRENT_SHELL" ]]; then
+        echo "Changing default shell to $user_shell..."
+        chsh -s "$user_shell"
+      else
+        echo "Keeping current shell ($CURRENT_SHELL)."
+      fi
+    else
+      echo "Non-interactive session: keeping current shell ($CURRENT_SHELL)."
+    fi
+  else
+    echo "Current shell is $CURRENT_SHELL (not Zsh). No change needed."
+  fi
 fi
 
 # Step 2: Restore original ~/.zshrc from backup
