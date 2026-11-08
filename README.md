@@ -23,6 +23,20 @@ This is what my terminal currently looks like with the setup.
     *(If an existing `~/.zshrc` is detected, a timestamped backup `~/.zshrc.bak.<timestamp>` will automatically be created before copying the new configuration).*
 3. Logout and login again for the default shell changes to take full effect.
 
+## How to undo the setup
+If you ever want to revert back to your default settings:
+1. Run the undo script:
+    ```bash
+    ./undo-debian.sh
+    ```
+    This script will:
+    - Revert your default shell back to Bash.
+    - Restore your original `~/.zshrc` from the backup.
+    - Remove Oh-My-Zsh (`~/.oh-my-zsh`) and Powerlevel10k.
+    - Remove FiraCode Nerd Font from `~/.local/share/fonts`.
+    - Offer to optionally uninstall packages installed for this setup (`zsh`, `python3-pygments`).
+2. Logout and login again for the shell change to take effect.
+
 [firacode]: https://github.com/tonsky/FiraCode
 [nerd-font]: https://www.nerdfonts.com
 [zsh]: https://opensource.com/article/19/9/getting-started-zsh
